@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "SingleThread": {
+      "commandName": "Project",
+      "commandLineArgs": "--input test\\enwik8 --output test\\enwik8_uwu --threads 1 --warmFile --measure",
+      "workingDirectory": ".."
+    },
+    "MultiThread": {
+      "commandName": "Project",
+      "commandLineArgs": "--input test\\enwik8 --output test\\enwik8_uwu --threads 6 --warmFile --measure",
+      "workingDirectory": ".."
+    }
+  }
+}

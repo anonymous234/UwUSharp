@@ -1,0 +1,7 @@
+###############################################################################
+# Set default behavior to automatically normalize line endings.
+###############################################################################
+* text=auto
+
+# We need to exclude line ending conversion from the test text files
+/UwUSharp.Tests/*.txt -text
