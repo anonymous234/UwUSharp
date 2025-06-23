@@ -8,7 +8,7 @@ UwUSharp is a high-performance, memory-safe C# port of the Rust-based uwuifier: 
 
 .NET supports portable, SIMD-accelerated code. I wanted to show that C# code can be efficient and that managed code is still cool.
 
-Unfortunately it only ended up being 50% to 70% as fast as the Rust version, but hey, thatís pretty good.
+Unfortunately it only ended up being 50% to 70% as fast as the Rust version, but hey, that‚Äôs pretty good.
 
 ### Design principles:
 
@@ -19,10 +19,10 @@ Unfortunately it only ended up being 50% to 70% as fast as the Rust version, but
 
 ### Features
 
+- Cross-platform: works on any OS and processor that .NET supports, (including x86, ARM, WebAssembly)
 - Uses `Span<byte>` and avoids unnecessary allocations
 - Multi-threaded support using TPL Dataflow
 - Usable as a library or as a standalone program
-- Cross-platform: works on any OS and processor that .NET supports, (including x86, ARM, WebAssembly) (untested)
 - Unit tests and performance measurement using BenchmarkDotNet
 - Identical output to the reference implementation
 - Can automatically run the original Rust implementation with the same parameters to compare performance
@@ -44,7 +44,7 @@ Sample results using .NET 9, on a Ryzen 7600 6-core processor with 6000 MT/s RAM
 
 - Vector128<byte> does not have a way to shift the entire vector by one byte (_mm_slli_si128), so I had to implement it using explicit SSE2, ARM Neon and WASM instructions, with a fallback to standard byte arrays.
 - .NET's default execution uses "tiered compilation", which generates un-optimized code at launch, and only optimizes the code after it's been running for some time (longer than it will actually take to process a file). This made the code run significantly slower. Thankfully it can be easily disabled in the project file. Note that the code still appears to get slightly faster after a few loops.
-- No ìconstî variables, meaning no compile-time lookup tables, which are required for the bitap algorithm. Instead, they are computed on every startup.
+- No ‚Äúconst‚Äù variables, meaning no compile-time lookup tables, which are required for the bitap algorithm. Instead, they are computed on every startup.
 - No easy way to declare a fixed-length array. C# has "fixed-size buffers" which are unsafe, and [InlineArray] which has awkward syntax and is not well documented.
 - C# uses UTF-16 for strings, which means I can't use string methods since it would force a conversion.
 - There is no way to define objects as memory-aligned. I believe .NET will align an array of Vector128<byte>anyway, but I couldn't find a confirmation. I wrote a version using manually allocated arrays and aligned reads, but it did not seem to be measurably faster.
